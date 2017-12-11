@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h2>{{user.first_name}}'s Home</h2>
+
+  {% if user.is_authenticated %}
+  <table>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Name:</strong></td><td>{{ user.first_name }} {{ user.last_name }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Username:</strong></td><td>{{ user.username }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Employee ID:</strong></td><td>{{ user.employee.employee_id }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Email:</strong></td><td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Date Of Birth:</strong></td><td>{{ user.employee.date_of_birth }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Date Of Joining:</strong></td><td>{{ user.employee.date_of_joining }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>PAN Number:</strong></td><td>{{ user.employee.pan_number }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Bank Account Number:</strong></td><td>{{ user.employee.bank_account_number }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Emergency Contact Number:</strong></td><td>{{ user.employee.emergency_contact_number }}</a></td></tr>
+  </table>
+  {% endif %}
+{% endblock %}

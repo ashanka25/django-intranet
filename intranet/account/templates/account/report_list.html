@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Report List{% endblock %}
+
+{% block content %}
+<h2>List of Projects</h3>
+<ul>
+	<li><a href="{% url 'account:role-report' %}">Role Report</a> </li>
+	<li><a href="{% url 'account:skill-report' %}">Skill Report</a></li>
+	<li><a href="{% url 'account:project-report' %}">Project Report</a></li>
+</ul>
+{% endblock %}

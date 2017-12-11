@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+  <table>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Name:</strong></td><td>{{ object.user.first_name }} {{ object.user.last_name }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Username:</strong></td><td>{{ object.user.username }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Employee ID:</strong></td><td>{{ object.employee_id }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Manager:</strong></td><td><a href="{% url 'account:employee-detail' object.manager.id %}">{{ object.manager }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Email:</strong></td><td><a href="mailto:{{ object.user.email }}">{{ object.user.email }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Date Of Birth:</strong></td><td>{{ object.date_of_birth }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Date Of Joining:</strong></td><td>{{ object.date_of_joining }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>PAN Number:</strong></td><td>{{ object.pan_number }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Bank Account Number:</strong></td><td>{{ object.bank_account_number }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Emergency Contact Number:</strong></td><td>{{ object.emergency_contact_number }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Project:</strong></td><td>{{ object.project }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Role:</strong></td><td>{{ object.get_role_display }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px; vertical-align:top;"><strong>Skills:</strong></td><td>{{ object.skills.all|join:", " }}</a></td></tr>
+  </table>
+  <br/>
+{% endblock %}

@@ -1,0 +1,16 @@
+
+{% block title %}Pie Chart{% endblock %}
+
+{% block content %}
+<h2>Pie chart</h3>
+<head>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+	</script>
+ </head>
+<body>
+        {{chart.as_html}}
+    </body>
+    </html>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Home Page{% endblock %}</title>
+</head>
+<body>
+  <header>
+	  {% if user.is_authenticated %}<span align="left" style="background-color:#A9CCE3;padding:18px 0px 35px 1223px;"> 
+	   Welcome, {{ user.username }}. &nbsp &nbsp;  <a href="{% url 'account:logout' %}"><button type="button" style="background-color:black;color:white">Logout</button></a></span>
+
+	  {% else %}<span align="right"><a href="{% url 'account:login' %}"><button type="button" style="background-color:black;color:white ">Login</button></a></span>
+    {% endif %}
+    <hr/>
+  </header>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+  <hr>
+</body>
+</html>

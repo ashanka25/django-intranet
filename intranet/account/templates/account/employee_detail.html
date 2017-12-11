@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+  {% if object.user.is_authenticated and object.user == request.user %}
+<h2 style="background-color:#D4E6F1;color:black;padding:30px 0px 30px 0px ;height:20px;">{{user.first_name}}'s Home
+          <a href="{% url 'account:employee-update' user.employee.id %}"><button type="button" style="background-color:black;color:white;">Modify Details</button></a>
+          <a href="{% url 'account:doc_form_upload' user.employee.id %}"><button type="button" style="background-color:black;color:white;">Upload Documents</button></a></h2> 
+  {% else %}
+  <h2 style="background-color:#D4E6F1;color:black;padding:30px 0px 30px 0px ;height:20px;">{{object.user.first_name}}'s Details</h2>
+  {% endif %}
+
+  <div style="align:right; width:150px; height:150px; position:relative; background-color:#fbfbfb; border:1px solid #b8b8b8; "data-controltype="image">
+	  {% if object.user.employee.image %}<img src="{{object.user.employee.image.url}}" alt="image" style="float: left; width:150px; height:150px ;margin-right: 100%;margin-bottom: 1.5em;">{% endif %}
+  </div>
+
+  <div style="float:left; margin-right: 100%">
+  {% if object.user.is_authenticated and object.user == request.user %}
+  <label for="file"><a href="{% url 'account:model_form_upload' user.employee.id %}"><button style="background-color:black;color:white;">{% if user.employee.image %}Modify{% else %}Upload{% endif %} Profile Picture</button></a></label>
+  <input type="file" name="" id="camerainput1" accept="image/*" capture="camera"/>
+  {% endif %}
+  </div>
+
+
+  <table>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Name:</strong></td><td>{{ object.user.first_name }} {{ object.user.last_name }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Username:</strong></td><td>{{ object.user.username }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Employee ID:</strong></td><td>{{ object.employee_id }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Manager:</strong></td><td><a href="{% url 'account:employee-detail' object.manager.id %}">{{ object.manager }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Email:</strong></td><td><a href="mailto:{{ object.user.email }}">{{ object.user.email }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Date Of Birth:</strong></td><td>{{ object.date_of_birth }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Date Of Joining:</strong></td><td>{{ object.date_of_joining }}</td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>PAN Number:</strong></td><td>{{ object.pan_number }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Bank Account Number:</strong></td><td>{{ object.bank_account_number }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Emergency Contact Number:</strong></td><td>{{ object.emergency_contact_number }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Project:</strong></td><td>{{ object.project }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px;"><strong>Role:</strong></td><td>{{ object.role }}</a></td></tr>
+	  <tr><td style="padding: 0px 10px 0px 5px; vertical-align:top;"><strong>Skills:</strong></td><td>{{ object.skill.all|join:", " }}</a></td></tr>
+  </table>
+  <br/>
+
+  {% if object.user.is_authenticated and object.user == request.user %}
+ <form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+ <div>
+   <label for="file"> Choose files to upload</label>
+   <input type="file" id="file" name="file" multiple>
+ </div>
+ <div>
+   <button style="background-color:black;color:white;">Submit</button>
+ </div>
+</form>
+  {% endif %}
+{% endblock %}
